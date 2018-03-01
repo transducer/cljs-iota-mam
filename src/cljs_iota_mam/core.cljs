@@ -22,7 +22,6 @@
             cljsjs.iota-mam
             [taoensso.timbre :as log]))
 
-
 ;;;;
 ;;;; Basic Usage
 
@@ -67,19 +66,20 @@
   an optional side key. Returns an updated state and the payload for sending.
 
   Arguments:
-  state - object Initialised IOTA MAM library with a provider set.
+  state - map Initialised IOTA MAM library with a provider set.
   message - string Tryte-encoded payload to be encrypted.
 
   Returns a map with:
-  :state - object Updated state object to be used with future actions.
+  :state - map Updated state object to be used with future actions.
   :payload - string Tryte-encoded payload.
   :root - string Tryte-encoded root of the payload.
   :address - string Tryte-encoded address used as an location to attach the
                     payload."
   [state message]
-  (-> (.create js/Mam state message)
-      js-utils/js->cljkk
-      js-utils/keywordize-mode))
+  (let [js-state (js-utils/cljkk->js state)]
+    (-> (.create js/Mam js-state message)
+        js-utils/js->cljkk
+        js-utils/keywordize-mode)))
 
 
 (defn decode
