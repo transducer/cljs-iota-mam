@@ -58,8 +58,9 @@
 
   Returns initialised JavaScript state object to be used in future actions"
   [state mode side-key]
-  (-> (.changeMode js/Mam state (name mode) side-key)
-      js-utils/mam-state-to-clj))
+  (let [js-state (js-utils/mam-state-to-js state)]
+    (-> (.changeMode js/Mam js-state (name mode) side-key)
+        js-utils/mam-state-to-clj)))
 
 
 (defn create
