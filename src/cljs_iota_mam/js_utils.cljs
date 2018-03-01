@@ -17,6 +17,7 @@
 
 (def camel-case (safe-case kebab/->camelCase))
 (def kebab-case (safe-case kebab/->kebab-case))
+(def snake-case (safe-case kebab/->snake_case))
 
 
 (def js->cljk #(js->clj % :keywordize-keys true))
@@ -28,8 +29,8 @@
 
 
 (def cljkk->js
-  "From Clojure to JavaScript object with camelCase keys."
-  (comp clj->js (partial transform-keys camel-case)))
+  "From Clojure to JavaScript object with snake_case keys."
+  (comp clj->js (partial transform-keys snake-case)))
 
 
 (defn keywordize-mode
