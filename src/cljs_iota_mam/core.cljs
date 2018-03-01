@@ -45,7 +45,7 @@
   "This takes the state object and changes the default stream mode from public
   to the specified mode and `side-key`. There are only three possible modes:
   `:public`, `:private`, & `:restricted`. If you fail to pass one of these modes
-  it will default to `public`. This will return a state object that tracks the
+  it will default to `:public`. This will return a state object that tracks the
   progress of your stream and streams you are following.
 
   Arguments:

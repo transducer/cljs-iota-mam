@@ -42,7 +42,7 @@
 
 
 ;;;;
-;;;; Off-tangle tests (Basic Usage)
+;;;; Off-Tangle tests (Basic Usage)
 
 (deftest mam-basic-usage-test
   (let [test-state (atom {:mam-msg nil})]
@@ -52,7 +52,8 @@
 
     (testing "Should be able to change mode"
       (is (= "IREALLYENJOYPOTATORELATEDPRODUCTS"
-             (-> (iota-mam/change-mode mam :restricted "IREALLYENJOYPOTATORELATEDPRODUCTS")
+             (-> mam
+                 (iota-mam/change-mode :private "IREALLYENJOYPOTATORELATEDPRODUCTS")
                  :channel
                  :side-key))))
 
@@ -66,11 +67,14 @@
 
     (testing "Should be able to decode an MAM payload"
       (let [{{:keys [root payload]} :mam-msg} @test-state]
-        (is (= "HALLO" (:payload (iota-mam/decode payload "IREALLYENJOYPOTATORELATEDPRODUCTS" root))))))))
+        (is (= "HALLO"
+               (-> payload
+                   (iota-mam/decode "IREALLYENJOYPOTATORELATEDPRODUCTS" root)
+                   :payload)))))))
 
 
 ;;;;
-;;;; On-tangle tests (Network Usage))
+;;;; On-Tangle tests (Network Usage))
 
 (deftest attach-test
   (testing "Should be able to attach a payload to the Tangle"
