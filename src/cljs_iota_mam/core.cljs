@@ -58,7 +58,8 @@
 
   Returns initialised JavaScript state object to be used in future actions"
   [state mode side-key]
-  (js-utils/js->cljkk (.changeMode js/Mam state (name mode) side-key)))
+  (-> (.changeMode js/Mam state (name mode) side-key)
+      js-utils/mam-state-to-clj))
 
 
 (defn create
@@ -76,10 +77,9 @@
   :address - string Tryte-encoded address used as an location to attach the
                     payload."
   [state message]
-  (let [js-state (js-utils/cljkk->js state)]
+  (let [js-state (js-utils/mam-state-to-js state)]
     (-> (.create js/Mam js-state message)
-        js-utils/js->cljkk
-        js-utils/keywordize-mode)))
+        js-utils/mam-state-to-clj)))
 
 
 (defn decode
@@ -99,7 +99,8 @@
   NOTE: throws ugly errors like Unwind_GetIPInfo and trap! when input is
         invalid (like wrong root)"
   [payload side-key root]
-  (js-utils/js->cljkk (.decode js/Mam payload side-key root)))
+  (-> (.decode js/Mam payload side-key root)
+      js-utils/mam-state-to-clj))
 
 
 ;;;;

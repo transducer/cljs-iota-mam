@@ -23,6 +23,20 @@
 (def js->cljk #(js->clj % :keywordize-keys true))
 
 
+(defn keywordize-mode
+  "Keywordizes the MAM mode (`:restricted`, `:public`, or `:private`) in a MAM
+  clj message."
+  [mam-msg]
+  (update-in mam-msg [:state :channel :mode] keyword))
+
+
+(defn stringify-mode
+  "Stringifies the MAM mode (`:restricted`, `:public`, or `:private`) in a MAM
+  clj message."
+  [mam-msg]
+  (update-in mam-msg [:state :channel :mode] name))
+
+
 (def js->cljkk
   "From JavaScript to Clojure with kekab-cased keywords."
   (comp (partial transform-keys kebab-case) js->cljk))
@@ -33,8 +47,15 @@
   (comp clj->js (partial transform-keys snake-case)))
 
 
-(defn keywordize-mode
-  "Keywordizes the MAM mode (`:restricted`, `:public`, or `:private`) in a MAM
-  clj message."
-  [mam-msg]
-  (update-in mam-msg [:state :channel :mode] keyword))
+(defn mam-state-to-clj [state]
+  (-> state
+      js->cljkk
+      keywordize-mode))
+
+
+(defn mam-state-to-js [state]
+  (if (map? state)
+    (-> state
+        stringify-mode
+        cljkk->js)
+    state))
