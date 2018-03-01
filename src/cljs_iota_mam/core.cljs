@@ -121,6 +121,7 @@
   (let [ch (chan)]
     (.then (.attach js/Mam payload address)
            #(go (>! ch (js-utils/js->cljkk %))))
+    (log/info "Performing Proof of Work...")
     ch))
 
 
