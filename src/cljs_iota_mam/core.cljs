@@ -79,7 +79,7 @@
   [state message]
   (let [js-state (js-utils/mam-state-to-js state)]
     (-> (.create js/Mam js-state message)
-        js-utils/mam-state-to-clj)))
+        js-utils/mam-msg-to-clj)))
 
 
 (defn decode
@@ -100,7 +100,7 @@
         invalid (like wrong root)"
   [payload side-key root]
   (-> (.decode js/Mam payload side-key root)
-      js-utils/mam-state-to-clj))
+      js-utils/mam-msg-to-clj))
 
 
 ;;;;

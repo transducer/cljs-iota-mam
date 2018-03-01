@@ -25,16 +25,16 @@
 
 (defn keywordize-mode
   "Keywordizes the MAM mode (`:restricted`, `:public`, or `:private`) in a MAM
-  clj message."
-  [mam-msg]
-  (update-in mam-msg [:state :channel :mode] keyword))
+  state."
+  [mam-state]
+  (update-in mam-state [:channel :mode] keyword))
 
 
 (defn stringify-mode
   "Stringifies the MAM mode (`:restricted`, `:public`, or `:private`) in a MAM
-  clj message."
-  [mam-msg]
-  (update-in mam-msg [:state :channel :mode] name))
+  clj state."
+  [mam-state]
+  (update-in mam-state [:channel :mode] name))
 
 
 (def js->cljkk
@@ -51,6 +51,12 @@
   (-> state
       js->cljkk
       keywordize-mode))
+
+
+(defn mam-msg-to-clj [mam-msg]
+  (-> mam-msg
+      js->cljkk
+      (update :state mam-state-to-clj)))
 
 
 (defn mam-state-to-js [state]

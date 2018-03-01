@@ -1,4 +1,4 @@
-(defproject cljs-iota-mam "1.0.3"
+(defproject cljs-iota-mam "1.0.4"
   :description "ClojureScript API for IOTA Masked Authenticated Messaging (MAM) JavaScript API"
 
   :url            "https://github.com/transducer/cljs-iota-mam"
