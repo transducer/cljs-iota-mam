@@ -50,8 +50,8 @@
 
   Arguments:
   state - object Initialised IOTA MAM library with a provider set.
-  mode - string Intended channel mode. Can be only: `:public`, `:private` or
-               `:restricted`.
+  mode - keyword Intended channel mode. Can be only: `:public`, `:private` or
+                 `:restricted`.
 
   side-key - string Tryte-encoded encryption key, any length. Required for
                     `:restricted` mode.
@@ -135,8 +135,8 @@
   Arguments:
   root - string Tryte-encoded string used as the entry point to a
                 stream. NOT the address!
-  mode - string Stream mode. Can be only: `:public`, `:private` or
-                `:restricted`. `nil` value falls back to `:public`.
+  mode - keyword Stream mode. Can be only: `:public`, `:private` or
+                 `:restricted`. `nil` value falls back to `:public`.
   side-key - string Tryte-encoded encryption key. `nil` value falls back to
                     default key
   callback: fn Tryte-encoded encryption key. `nil` value will cause the function
