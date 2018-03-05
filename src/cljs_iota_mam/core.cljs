@@ -130,7 +130,7 @@
   "Fetches the stream sequentially from a known `root` and optional `side-key`.
   This call can be used in two ways: Without a callback will cause the function
   to read the entire stream before returning. With a callback the application
-  will return data through the callback and finally the `nextroot` when
+  will return data through the callback and finally the `next-root` when
   finished.
 
   Arguments:
@@ -145,8 +145,8 @@
 
   Returns map with:
   `:next-root` - string Tryte-encoded string pointing to the next root.
-  `:messages` - coll of Tryte-encoded messages from the stream.
-  NOTE: This is only returned when the call is not using a callback."
+  `:messages` - coll of Tryte-encoded messages from the stream. NOTE: This is
+                     only returned when the call is not using a callback."
   ([root mode]
    (fetch root mode nil nil))
   ([root mode side-key]
