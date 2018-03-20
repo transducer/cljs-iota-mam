@@ -78,11 +78,13 @@
 
 (deftest attach-test
   (testing "Should be able to attach a payload to the Tangle"
-    (let [{:keys [address payload]} @created-mam-msg]
+    (let [depth                     6
+          mwm                       3
+          {:keys [address payload]} @created-mam-msg]
       (test-async
        (test-within 20000 ;; PoW takes work
                     (go
-                      (let [transactions (<! (iota-mam/attach payload address))]
+                      (let [transactions (<! (iota-mam/attach payload address depth mwm))]
                         (is (= 3 (count transactions)))
                         (is (contains-keys? (first transactions)
                                             :address

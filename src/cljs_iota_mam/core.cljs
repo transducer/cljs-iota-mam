@@ -36,9 +36,12 @@
   seed - string Tryte-encoded seed. `nil` value generates a random seed.
   security - int Security of the keys used. `nil` value defaults to 2.
 
+  ;; TODO:
+  start-count - int Start index for reading messages. `nil` value defaults to 0.
+
   Returns initialised state object to be used in future actions."
-  [iota seed security]
-  (.init js/Mam iota seed security))
+  [iota seed security #_start-count]
+  (.init js/Mam iota seed security #_start-count))
 
 
 (defn change-mode
@@ -115,15 +118,21 @@
 
   payload - string Tryte-encoded payload to be attached to the Tangle.
   address - string Tryte-encoded string returned from the `create` function.
+  depth - int Value that determines how far to go for tip selection.
+  min-weight-magnitude - int Minimum weight magnitude.
 
   Returns a core.async channel that receives transaction objects that have been
   attached to the network."
-  [payload address]
-  (let [ch (chan)]
-    (.then (.attach js/Mam payload address)
-           #(go (>! ch (js-utils/js->cljkk %))))
-    (log/info "Performing Proof of Work...")
-    ch))
+  ([payload address]
+   (attach payload address 6))
+  ([payload address depth]
+   (attach payload address depth 14))
+  ([payload address depth min-weight-magnitude]
+   (let [ch (chan)]
+     (.then (.attach js/Mam payload address depth min-weight-magnitude)
+            #(go (>! ch (js-utils/js->cljkk %))))
+     (log/info "Performing Proof of Work...")
+     ch)))
 
 
 (defn fetch
