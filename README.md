@@ -48,6 +48,10 @@ becomes
 
 Docstrings for the methods and namespaces are adjusted to ClojureScript from the [IOTA MAM JavaScript library](https://github.com/iotaledger/mam.client.js).
 
+## Running tests
+
+Figwheel runs test properly after changing and saving the core_test.cljs file.
+
 ## Acknowledgements
 
 This IOTA MAM library uses JavaScript utils methods from the [ClojureScript API for Ethereum Web3 API by district0x](https://github.com/district0x/cljs-web3).
