@@ -1,4 +1,4 @@
-(defproject cljs-iota-mam "1.0.7"
+(defproject cljs-iota-mam "1.0.8"
   :description "ClojureScript API for IOTA Masked Authenticated Messaging (MAM) JavaScript API"
 
   :url            "https://github.com/transducer/cljs-iota-mam"
@@ -9,7 +9,7 @@
   :dependencies   [[org.clojure/clojurescript "1.9.946"]
                    [camel-snake-kebab "0.4.0"]
                    [cljs-iota "1.0.1"]
-                   [cljsjs/iota-mam "0.0.1-0"]]
+                   [cljsjs/iota-mam "0.0.1-1"]]
 
   :plugins        [[lein-cljsbuild "1.1.7"]]
 
