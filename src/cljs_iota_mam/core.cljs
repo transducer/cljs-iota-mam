@@ -149,8 +149,9 @@
                  `:restricted`. `nil` value falls back to `:public`.
   side-key - string Tryte-encoded encryption key. `nil` value falls back to
                     default key
-  callback: fn Tryte-encoded encryption key. `nil` value will cause the function
-               to read the entire stream before returning
+
+  callback: fn Callback. `nil` value will cause the function to read the entire
+                         stream before returning
 
   Returns map with:
   `:next-root` - string Tryte-encoded string pointing to the next root.

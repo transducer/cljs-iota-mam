@@ -27,7 +27,6 @@
          (map #(if-not (int-code-for-bracket? %) (char %) null-tryte))
          (apply str))))
 
-
 (def provider       "http://localhost:14700") ;; For testnet
                                               ;; use "https://testnet140.tangle.works"
 
