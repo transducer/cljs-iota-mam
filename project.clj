@@ -21,6 +21,9 @@
 
   :resource-paths []
 
+  :deploy-repositories [["releases" :clojars]
+                        ["snapshots" :clojars]]
+
   :profiles       {:dev
                    {:dependencies   [[binaryage/devtools "0.9.9"]
                                      [com.cemerick/piggieback "0.2.2"]
